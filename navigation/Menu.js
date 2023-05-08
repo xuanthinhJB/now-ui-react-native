@@ -12,6 +12,7 @@ const { width } = Dimensions.get('screen');
 function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
   const insets = useSafeArea();
   const screens = ['Home', 'Components', 'Articles', 'Profile', 'Account'];
+  const lmsScreens = ['LMS_Login', 'LMS_Home', 'LMS_Learning'];
   return (
     <Block style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
       <Block style={styles.header}>
@@ -23,6 +24,39 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
       <Block flex style={{ paddingLeft: 8, paddingRight: 14 }}>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
           {screens.map((item, index) => {
+            return (
+              <DrawerCustomItem
+                title={item}
+                key={index}
+                navigation={navigation}
+                focused={state.index === index ? true : false}
+              />
+            );
+          })}
+          <Block flex style={{ marginTop: 24, marginVertical: 8, paddingHorizontal: 8 }}>
+            <Block
+              style={{
+                borderColor: 'black',
+                width: '93%',
+                borderWidth: StyleSheet.hairlineWidth,
+                marginHorizontal: 10,
+              }}
+            />
+            <Text
+              color={nowTheme.COLORS.BLACK}
+              style={{
+                marginTop: 30,
+                marginLeft: 20,
+                marginBottom: 10,
+                fontFamily: 'montserrat-regular',
+                fontWeight: '300',
+                fontSize: 12,
+              }}
+            >
+              LMS
+            </Text>
+          </Block>
+          {lmsScreens.map((item, index) => {
             return (
               <DrawerCustomItem
                 title={item}

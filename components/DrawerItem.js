@@ -99,6 +99,38 @@ class DrawerItem extends React.Component {
             color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
           />
         );
+
+      // LMS
+      case 'LMS_Home':
+        return (
+          <Icon
+            name="app2x"
+            family="NowExtra"
+            size={18}
+            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
+            style={{ opacity: 0.5 }}
+          />
+        );
+      case 'LMS_Login':
+        return (
+          <Icon
+            name="app2x"
+            family="NowExtra"
+            size={18}
+            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
+            style={{ opacity: 0.5 }}
+          />
+        );
+      case 'LMS_Learning':
+        return (
+          <Icon
+            name="app2x"
+            family="NowExtra"
+            size={18}
+            color={focused ? nowTheme.COLORS.PRIMARY : 'black'}
+            style={{ opacity: 0.5 }}
+          />
+        );
       default:
         return null;
     }

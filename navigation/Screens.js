@@ -1,6 +1,7 @@
 import { Animated, Dimensions, Easing } from 'react-native';
 // header for screens
 import { Header, Icon } from '../components';
+import { LMSHeader } from '../components/LMS';
 import { nowTheme, tabs } from '../constants';
 
 import Articles from '../screens/Articles';
@@ -20,10 +21,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 
+// LMS
+import LMSLogin from '../screens/LMS/Login';
+import LMSHome from '../screens/LMS/Home';
+import LMSMyLearning from '../screens/LMS/MyLearning';
+import LMSAccount from '../screens/LMS/Account';
+import LMSSearch from '../screens/LMS/Search';
+import LMSCourseLearning from '../screens/LMS/CourseLearning';
+
 const { width } = Dimensions.get('screen');
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+const BottomTabs = createBottomTabNavigator();
 
 function ComponentsStack(props) {
   return (
@@ -226,7 +236,163 @@ function AppStack(props) {
           headerShown: false,
         }}
       />
+      {/* LMS */}
+      <Drawer.Screen
+        name="LMS_Login"
+        component={LMSLoginStack}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="LMS_Home"
+        component={LMSHomeStack}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="LMS_Learning"
+        component={LMSLearningStack}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Drawer.Navigator>
+  );
+}
+
+function LMSLoginStack(props) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        mode: 'card',
+        headerShown: 'screen',
+      }}
+    >
+      <Stack.Screen
+        name="LMS_Login"
+        component={LMSLogin}
+        options={{
+          header: ({ navigation, scene }) => (
+            <LMSHeader title="Login" search options navigation={navigation} scene={scene} />
+          ),
+          cardStyle: { backgroundColor: '#FFFFFF' },
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function LMSHomeStack(props) {
+  return (
+    <BottomTabs.Navigator
+      initialRouteName='LMS_Home'
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
+      }}
+    >
+      <BottomTabs.Screen
+        name="Home"
+        component={LMSHome}
+        options={{
+          header: ({ navigation, scene }) => (
+            <LMSHeader title="Home" search options navigation={navigation} scene={scene} />
+          ),
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              color={color}
+              name="home"
+              family="AntDesign"
+            />
+          ),
+          cardStyle: { backgroundColor: '#FFFFFF' },
+        }}
+      />
+      <BottomTabs.Screen
+        name="Search"
+        component={LMSSearch}
+        options={{
+          header: ({ navigation, scene }) => (
+            <LMSHeader title="Search" search options navigation={navigation} scene={scene} />
+          ),
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              color={color}
+              name="find"
+              family="AntDesign"
+            />
+          ),
+          cardStyle: { backgroundColor: '#FFFFFF' },
+        }}
+      />
+      <BottomTabs.Screen
+        name="My Learning"
+        component={LMSMyLearning}
+        options={{
+          header: ({ navigation, scene }) => (
+            <LMSHeader title="My Learning" search options navigation={navigation} scene={scene} />
+          ),
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              color={color}
+              name="bars"
+              family="AntDesign"
+            />
+          ),
+          cardStyle: { backgroundColor: '#FFFFFF' },
+        }}
+      />
+      <BottomTabs.Screen
+        name="Account"
+        component={LMSAccount}
+        options={{
+          header: ({ navigation, scene }) => (
+            <LMSHeader title="Account" search options navigation={navigation} scene={scene} />
+          ),
+          tabBarIcon: ({ color, size }) => (
+            <Icon
+              color={color}
+              name="user"
+              family="AntDesign"
+            />
+          ),
+          cardStyle: { backgroundColor: '#FFFFFF' },
+        }}
+      />
+    </BottomTabs.Navigator>
+  );
+}
+
+function LMSLearningStack(props) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        mode: 'card',
+        headerShown: 'screen',
+      }}
+    >
+      <Stack.Screen
+        name="LMS_Learning"
+        component={LMSHome}
+        options={{
+          header: ({ navigation, scene }) => (
+            <LMSHeader title="Learning" search options navigation={navigation} scene={scene} />
+          ),
+          cardStyle: { backgroundColor: '#FFFFFF' },
+        }}
+      />
+      <Stack.Screen
+        name="LMS_Course_Learning"
+        component={LMSCourseLearning}
+        options={{
+          header: ({ navigation, scene }) => (
+            <LMSHeader title="Course Detail" search options navigation={navigation} scene={scene} />
+          ),
+          cardStyle: { backgroundColor: '#FFFFFF' },
+        }}
+      />
+    </Stack.Navigator>
   );
 }
 
